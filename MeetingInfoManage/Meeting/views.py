@@ -13,9 +13,9 @@ from django.core.paginator import *
 # Create your views here.
 
 def index(request):
-        request.session['current'] = 'index'
-        client_list = Client.objects.all()
-    # try:
+    request.session['current'] = 'index'
+    client_list = Client.objects.all()
+    try:
         paginator = Paginator(client_list, 15)
         try:
             page = request.GET.get('page', 1)
@@ -26,10 +26,10 @@ def index(request):
             page_client_list = paginator.page(paginator.num_pages)
         info = {'paginator': paginator, 'page_client_list':page_client_list}
         return render(request, 'Meeting/index.html', info)
-    # except:
-        # return HttpResponse('error')
+    except:
+        return HttpResponse('error')
 
-# @csrf_exempt
+@csrf_exempt
 def lead_in(request):
     if request.method == 'GET' :
         return render(request, 'Meeting/meeting_lead_in.html')
@@ -45,7 +45,6 @@ def lead_in(request):
             meeting.number_of_participant = request.POST['number_of_participant']
             meeting.weight_of_meeting = request.POST['weight_of_meeting']
             meeting.save()
-            # return HttpResponseRedirect(reverse('index'))
             return HttpResponseRedirect(reverse('index'))
         except:
             return HttpResponse('error')
