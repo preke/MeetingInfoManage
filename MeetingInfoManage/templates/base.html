@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title> {% block title %} title {% endblock %} </title>
+        {% block css %} {% endblock %}
+        {% block js %} {% endblock %}
+
+    </head>
+
+    <body>
+        {% if request.session.user_name %}
+            <p>{{request.session.user_name}} </p>
+            <form action='{% url 'logout' %}'> <button> 登出 </button> </form>
+        {% else %}
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <p> 用户名: <input name="user_name">  密码: <input name="password">
+                    <button name="login"> 登录 </button>
+                </p>
+            </form>
+        {% endif %}
+        <hr>
+        {% block body %} body {% endblock %}
+    </body>
+
+</html>

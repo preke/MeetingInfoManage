@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %} 会议信息导入 {% endblock %}
+
+{% block body %}
+    <form href="#" method="post">
+        {% csrf_token %}
+        <p> 会议时间: 年 <input type="text" name="year" > 月 <input type="text" name="month"> </P>
+        <p> 活动主题 : <input type="text" name="theme" > </p>
+        <p> 讲师: <input type="text" name="name_of_speecher"> </p>
+        <p> 讲者类型 <input type="text" name="type_of_speecher"> </p>
+        <p> 讲者城市 <input type="text" name="city_of_speecher"> </P>
+        <p> 参会人数 <input type="text" name="number_of_participant"> </p>
+        <p> 会议权重 <input type="text" name="weight_of_meeting"> </p>
+        <p> <button> 提交 </button>
+    </form>
+{% endblock %}
