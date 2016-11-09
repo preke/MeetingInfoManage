@@ -7,8 +7,26 @@ from django.core.urlresolvers import reverse
 from Meeting.models import Meeting
 from User.models import Client, RSM, RMM
 from django.views.decorators.csrf import csrf_exempt
-
+from django.core.paginator import *
 # Create your views here.
+
+def index(request):
+        request.session['current'] = 'index'
+        client_list = Client.objects.all()
+    # try:
+        paginator = Paginator(client_list, 15)
+        try:
+            page = request.GET.get('page', 1)
+            page_client_list = paginator.page(page)
+        except PageNotAnInteger:
+            page_client_list = paginator.page(1)
+        except EmptyPage:
+            page_client_list = paginator.page(paginator.num_pages)
+        info = {'paginator': paginator, 'page_client_list':page_client_list}
+        return render(request, 'User/index.html', info)
+    # except:
+        # return HttpResponse('error')
+
 
 @csrf_exempt
 def lead_in(request):
@@ -17,7 +35,7 @@ def lead_in(request):
     else :
         client = Client.objects.create()
         client.name = request.POST['name']
-        client.sex = request.POST['sex']
+        client.sex = request.POST['gender']
         client.birth = request.POST['birth']
         client.job = request.POST['job']
         client.office = request.POST['office']
@@ -29,7 +47,7 @@ def lead_in(request):
         client.email = request.POST['email']
         client.region_manager = request.POST['region_manager']
         client.strong_point = request.POST['string_point']
-        client.weight_of_meeting = request.POST['weight_of_meeting']
+        client.potential_weight = request.POST['potential_weight']
         client.speecher_times = request.POST['speecher_times']
         client.chairman_times = request.POST['chairman_times']
         client.save()
