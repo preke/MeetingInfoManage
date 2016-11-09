@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %} 客户信息导入 {% endblock %}
+
+{% block body %}
+    <form href="#" method="post">
+        {% csrf_token %}
+        <p> 名字: <input type="text" name="name">  性别: <input type="text" name="sex"> </p>
+        <p> 出生年月: <input type="text" name="birth"> </p>
+        <p> 职务: <input type="text" name="job"> 科室: <input type="text" name="office"> </p>
+        <p> 专业: <input type="text" name="major"> 职称: <input type="text" name="title"> </p>
+        <p> 单位: <input type="text" name="unit"> </p>
+        <p> 手机 : <input type="text" name="phone"> 邮箱:  <input type="text" name="email"> </p>
+        <p> 学会任职: <input type="text" name="institute_job"> 特长: <input type="text" name="string_point"> </p>
+        <p> 负责大区经理: <input type="text" name="region_manager"> </p>
+        <p> 客户潜力权重: <input type="text" name="potential_weight"</p>
+        <p> 主席统计: <input type="text" name="chairman_times"> </p>
+        <p> 讲者统计: <input type="text" name="speecher_times"> </p>
+        <button> 提交 </button>
+    </form>
+{% endblock %}
