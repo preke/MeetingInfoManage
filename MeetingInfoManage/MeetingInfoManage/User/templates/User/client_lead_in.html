@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %} 客户信息导入 {% endblock %}
+
+{% block body %}
+
+
+
+{#    <form href="{% url 'client_lead_in' %}" method="post">#}
+{#        {% csrf_token %}#}
+{#        <p> 名字: <input type="text" name="name">  性别: <input type="text" name="sex"> </p>#}
+{#        <p> 出生年月: <input type="text" name="birth"> </p>#}
+{#        <p> 职务: <input type="text" name="job"> 科室: <input type="text" name="office"> </p>#}
+{#        <p> 专业: <input type="text" name="major"> 职称: <input type="text" name="title"> </p>#}
+{#        <p> 单位: <input type="text" name="unit"> </p>#}
+{#        <p> 手机 : <input type="text" name="phone"> 邮箱:  <input type="text" name="email"> </p>#}
+{#        <p> 学会任职: <input type="text" name="institute_job"> 特长: <input type="text" name="string_point"> </p>#}
+{#        <p> 负责大区经理: <input type="text" name="region_manager"> </p>#}
+{#        <p> 客户潜力权重: <input type="text" name="potential_weight"</p>#}
+{#        <p> 主席统计: <input type="text" name="chairman_times"> </p>#}
+{#        <p> 讲者统计: <input type="text" name="speecher_times"> </p>#}
+{#        <button> 提交 </button>#}
+{#    </form>#}
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3" align="center" >
+                    <h4>
+                        <a href="meeting_info.html" style="color: #000;font-weight: bold;">会议信息</a>
+                    </h4>
+                </div>
+                <div class="col-sm-3" align="center" >
+                    <h4>
+                        <a href="{% url 'index' %}">用户信息</a>
+                    </h4>
+                </div>
+                <div class="col-sm-3" align="center">
+                    {% if request.session.RMM %}
+                    <h4>
+                        <a href="{% url 'meeting_lead_in' %}">会议录入</a>
+                    </h4>
+                    {% endif %}
+                </div>
+
+                <div class="col-sm-3" align="center" id="current">
+                    {% if request.session.RSM %}
+                    <h4>
+                        <a href="{% url 'client_lead_in' %}">用户录入</a>
+                    </h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<div class="container" style="height: 1000px;width: 1400px; background-color: #FBF4F4">
+    <br>
+    <br>
+    <br>
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+
+        <form class="form" href="{% url 'client_lead_in' %}" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-3"><label for="name">姓名 ：</label></div>
+                <div class="col-sm-8"><input class="form-control" type="text" id="name" placeholder="请输入姓名" name="name"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label>性别 ：</label></div>
+                <div class="col-sm-8">
+                    <label for="male" style="font-weight: normal;" >男</label>
+                    <input type="radio" id="male" value="男" name="gender">
+                    <label for="femal" style="font-weight: normal;">女</label>
+                    <input type="radio" id="femal" value="女" name="gender">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="birth">出生年月 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="date" id="birth" name="birth" placeholder="请输入日期">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="post">职务 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="post" name="job" placeholder="请输入职务">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="office">科室 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="office" name="office" placeholder="请输入科室">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="major">专业 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="major" name="major" placeholder="请输入专业">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="nickname">职称 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="nickname" name="title" placeholder="请输入职称">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="unit">单位 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="unit" name="unit" placeholder="请输入单位">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="phone">手机 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="tel" id="phone" name="phone" placeholder="请输入手机号码">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="email">邮箱 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control" type="email" id="email" name="email" placeholder="请输入邮箱">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="job">学会任职 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="job" name="institute_job" placeholder="请输入学会任职">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="skill">特长 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="skill"  name="string_point" placeholder="请输入特长">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="manager">负责大区经理 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="manager" name="region_manager" placeholder="请输入负责大区经理信息">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="weight">客户潜力权重 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="weight" name="potential_weight" placeholder="请输入客户潜力权重">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="chairman">主席统计 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="chairman" name="chairman_times" placeholder="请输入主席统计">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-3"><label for="speaker">讲者统计 ：</label></div>
+                <div class="col-sm-8">
+                    <input class="form-control"  id="speaker" name="speecher_times" placeholder="请输入讲者统计">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-2"><input class="form-control" type="submit" value="提交" style="font-weight: bold"> </div>
+            </div>
+        </form>
+        <br>
+        <br>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
