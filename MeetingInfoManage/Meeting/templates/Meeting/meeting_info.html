@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+{% extends 'base.html' %}
+
+{% block title %} 会议信息 {% endblock title %}
+
+{% block body %}
+
+    <table border = '1'>
+        <thead style='background-color: blue'>
+            <th>年月</th>
+            <th>编号</th>
+            <th>活动主题</th>
+            <th>讲师名字</th>
+            <th>讲者类型</th>
+            <th>讲者城市</th>
+            <th>参会人数</th>
+            <th>会议类型</th>
+            <th>会议权重</th>
+        </thead>
+        <tbody  style='background-color: grey'>
+            {% for meeting in page_meeting_list.object_list %}
+            <tr>
+                <th> {{meeting.date}}</th>  <th>{{meeting.number}}</th> <th> {{meeting.theme}}</th>
+                <th>{{meeting.name_of_speecher}}</th> <th>{{meeting.type_of_speecher}}</th> <th>{{meeting.city_of_speecher}}</th>
+                <th>{{meeting.number_of_participant}}</th> <th>{{meetiing.type_of_meeting}}</th> <th>{{meeting.weight_of_meeting}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr/>
+    <br>
+    <br>
+    <div class="container" align="center">
+        当前页:{{page_meeting_list.number}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="?page=1"> 首页 </a> &nbsp;&nbsp;
+        {% if page_meeting_list.has_previous %} <a href="?page={{page_meeting_list.prevoius_page_number}}" > 上一页 </a> &nbsp;&nbsp; {% endif %}
+        {% if page_meeting_list.has_next %} <a href="?page={{page_meeting_list.next_page_number}}" > 下一页 </a> &nbsp;&nbsp; {% endif %}
+        <a href="?page={{paginator.num_pages}}"> 末页 </a>
+    </div>
+
+{% endblock body %}

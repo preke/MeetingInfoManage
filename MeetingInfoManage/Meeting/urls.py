@@ -5,5 +5,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^leadin$', 'Meeting.views.lead_in', name = 'meeting_lead_in'),
-    url(r'^index$', 'Meeting.views.index', name='meeting_index'),
+    url(r'^leadout$', 'Meeting.views.lead_out', name = 'meeting_lead_out'),
+    url(r'^meeting_info$', 'Meeting.views.meeting_info', name='meeting_info'),
 ]

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from User.models import Client
 from django.http import HttpResponse
@@ -8,6 +9,10 @@ from Meeting.models import Meeting
 from User.models import Client, RSM, RMM
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import *
+from MeetingInfoManage.settings import *
+from datetime import datetime
+import csv
+import os
 # Create your views here.
 
 def index(request):
@@ -52,6 +57,31 @@ def lead_in(request):
         client.chairman_times = request.POST['chairman_times']
         client.save()
         return HttpResponseRedirect(reverse('index'))
+
+def unicode_2_utf_8(cell):
+    if isinstance(cell, unicode):
+        return cell.encode('utf-8')
+    else :
+        return cell
+
+def lead_out(request):
+    client_list = Client.objects.all();
+    relative_path = 'static/storage/' + 'client';
+    csvfile = open(os.path.join(BASE_DIR, relative_path), 'w')
+    writer = csv.writer(csvfile)
+    writer.writerow(['姓名', '性别', '出生年月', '职务', '科室', '专业', '职称', '单位', '手机', '邮箱', '学会任职', '特长', '负责大区经理', '客户潜力权重', '主席统计', '讲师统计'])
+    for client in client_list:
+        record = [client.name, client.sex, client.birth, client.job, client.office, client.major, client.title, client.unit, client.phone]
+        record.append(client.email)
+        record.append(client.institute_job)
+        record.append(client.strong_point)
+        record.append(client.region_manager)
+        record.append(client.potential_weight)
+        record.append(client.chairman_times)
+        record.append(client.speecher_times)
+        record = [unicode_2_utf_8(cell) for cell in record]
+        writer.writerow(record)
+    return HttpResponseRedirect(reverse('index'))
 
 @csrf_exempt
 def login(request):

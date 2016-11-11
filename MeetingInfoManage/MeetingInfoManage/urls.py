@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^User/', include('User.urls')),
     url(r'^Meeting/', include('Meeting.urls')),
     url(r'^$', 'User.views.index', name = 'index'),
+    # url(r'^media/jj.png$', )
 ]
