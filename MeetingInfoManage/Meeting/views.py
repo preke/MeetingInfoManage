@@ -21,7 +21,7 @@ def index(requset):
 def meeting_info(request):
     request.session['current'] = 'meeting_info'
     # client_list = Client.objects.all()
-    meeting_list = Meeting.objects.all();
+    meeting_list = Meeting.objects.all().order_by('-date');
     try:
         paginator = Paginator(meeting_list, 15)
         try:
@@ -52,9 +52,41 @@ def lead_in(request):
             meeting.type_of_meeting = request.POST['type_of_meeting']
             meeting.weight_of_meeting = request.POST['weight_of_meeting']
             meeting.save()
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('meeting_lead_out'))
         except:
             return HttpResponse('error');
+
+@csrf_exempt
+def lead_in_extends(request):
+    if request.method == 'GET':
+        return render(request, 'Meeting/meeting_lead_in_extends.html')
+    else :
+        file = request.FILES['meeting_lead_in_extends']
+        reader = csv.reader(file)
+        reader.next() # cut down he head
+        record = reader.next()
+        while True :
+            meeting, not_exist = Meeting.objects.get_or_create(date = record[0], number = record[1], theme = record[2],\
+                                                            name_of_speecher = record[3], type_of_speecher = record[4],\
+                                                            city_of_speecher = record[5], number_of_participant = record[6],\
+                                                            type_of_meeting = record[7], weight_of_meeting = record[8])
+            if not_exist :
+                meeting.save()
+            try:
+                record = reader.next()
+            except:
+                break
+        return HttpResponseRedirect(reverse("index"))
+
+
+
+
+
+
+
+
+
+
 
 def unicode_2_utf_8(cell):
     if isinstance(cell, unicode):
@@ -69,7 +101,9 @@ def lead_out(request):
     writer = csv.writer(csvfile)
     writer.writerow(['年月', '编号', '活动主题', '讲者名字', '讲者类型', '讲者城市', '参会人数', '会议类型', '会议权重'])
     for meeting in meeting_list:
-        record = [meeting.date, meeting.number, meeting.theme, meeting.name_of_speecher, meeting.type_of_speecher,meeting.city_of_speecher, meeting.number_of_participant, meeting.type_of_meeting, meeting.weight_of_meeting];
+        record = [meeting.date, meeting.number, meeting.theme, meeting.name_of_speecher,
+                  meeting.type_of_speecher,meeting.city_of_speecher, meeting.number_of_participant,
+                  meeting.type_of_meeting, meeting.weight_of_meeting];
         record = [unicode_2_utf_8(cell) for cell in record]
         writer.writerow(record)
     return HttpResponseRedirect(reverse('index'))

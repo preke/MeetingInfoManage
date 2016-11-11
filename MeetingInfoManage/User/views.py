@@ -17,7 +17,7 @@ import os
 
 def index(request):
         request.session['current'] = 'index'
-        client_list = Client.objects.all()
+        client_list = Client.objects.all().order_by('name')
     # try:
         paginator = Paginator(client_list, 15)
         try:
@@ -56,7 +56,37 @@ def lead_in(request):
         client.speecher_times = request.POST['speecher_times']
         client.chairman_times = request.POST['chairman_times']
         client.save()
+        return HttpResponseRedirect(reverse('client_lead_out'))
+
+@csrf_exempt
+def lead_in_extends(request):
+    if request.method == 'GET':
+        return render(request, 'User/meeting_lead_in_extends.html')
+    else :
+        # try:
+        file = request.FILES['client_lead_in_extends']
+        reader = csv.reader(file)
+        reader.next() # cut down he head
+        record = reader.next()
+        while True:
+            client, not_exist = Client.objects.get_or_create(name = record[0], sex = record[1],\
+                                birth = record[2], job = record[3],office = record[4], major = record[5],\
+                                title = record[6], unit = record[7], institute_job = record[8],\
+                                phone = record[9], email = record[10], region_manager = record[11], \
+                                strong_point = record[12],potential_weight = int(record[13]), \
+                                chairman_times = int(record[14]), speecher_times = int(record[15]))
+            if (not_exist) :
+                client.save()
+            try:
+                record = reader.next()
+            except:
+                break
         return HttpResponseRedirect(reverse('index'))
+        # except:
+            # return HttpResponse('error')
+
+
+
 
 def unicode_2_utf_8(cell):
     if isinstance(cell, unicode):
@@ -69,9 +99,11 @@ def lead_out(request):
     relative_path = 'static/storage/' + 'client';
     csvfile = open(os.path.join(BASE_DIR, relative_path), 'w')
     writer = csv.writer(csvfile)
-    writer.writerow(['姓名', '性别', '出生年月', '职务', '科室', '专业', '职称', '单位', '手机', '邮箱', '学会任职', '特长', '负责大区经理', '客户潜力权重', '主席统计', '讲师统计'])
+    writer.writerow(['姓名', '性别', '出生年月', '职务', '科室', '专业', '职称', '单位', '手机',
+                    '邮箱', '学会任职', '特长', '负责大区经理', '客户潜力权重', '主席统计', '讲师统计'])
     for client in client_list:
-        record = [client.name, client.sex, client.birth, client.job, client.office, client.major, client.title, client.unit, client.phone]
+        record = [client.name, client.sex, client.birth, client.job, client.office,\
+                  client.major, client.title, client.unit, client.phone]
         record.append(client.email)
         record.append(client.institute_job)
         record.append(client.strong_point)

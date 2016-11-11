@@ -1,6 +1,5 @@
 姓名,性别,出生年月,职务,科室,专业,职称,单位,手机,邮箱,学会任职,特长,负责大区经理,客户潜力权重,主席统计,讲师统计
 ,,,,,,,,,,,,,0,1,1
- 五二,male,birth,doctor_1,hospital_1,doctor_1,title,unit,email,institute,phone,manage,string_point,0,0,0
 Preke_Boyce_0,male,birth,doctor_0,hospital_0,doctor_0,title,unit,phone,email,institute,string_point,manage,0,0,0
 Preke_Boyce_1,male,birth,doctor_1,hospital_1,doctor_1,title,unit,phone,email,institute,string_point,manage,0,0,0
 Preke_Boyce_10,male,birth,doctor_10,hospital_10,doctor_10,title,unit,phone,email,institute,string_point,manage,0,0,0
@@ -51,13 +50,6 @@ Preke_Boyce_6,male,birth,doctor_6,hospital_6,doctor_6,title,unit,phone,email,ins
 Preke_Boyce_7,male,birth,doctor_7,hospital_7,doctor_7,title,unit,phone,email,institute,string_point,manage,0,0,0
 Preke_Boyce_8,male,birth,doctor_8,hospital_8,doctor_8,title,unit,phone,email,institute,string_point,manage,0,0,0
 Preke_Boyce_9,male,birth,doctor_9,hospital_9,doctor_9,title,unit,phone,email,institute,string_point,manage,0,0,0
-共胡,男,birth,doctor_0,hospital_0,doctor_0,title,unit,email,institute,phone,manage,string_point,0,0,0
 名字,性别,birth,job,office,major,title,unit,phone,email,institute,string_point,manage,0,0,0
 大哥,性别,birth,job,office,major,title,unit,phone,1772729359@qq.com,institute,string_point,manage,0,0,0
-李奕蓁,male,birth,doctor_10,hospital_10,doctor_10,title,unit,email,institute,phone,manage,string_point,0,0,0
-李海航,男,birth,doctor_0,hospital_0,doctor_0,title,unit,email,institute,phone,manage,string_point,0,0,0
-温志元,male,birth,doctor_1,hospital_1,doctor_1,title,unit,email,institute,phone,manage,string_point,0,0,0
-王无,male,birth,doctor_11,hospital_11,doctor_11,title,unit,email,institute,phone,manage,string_point,0,0,0
-网吧,male,birth,doctor_10,hospital_10,doctor_10,title,unit,email,institute,phone,manage,string_point,0,0,0
-老淦,male,birth,doctor_11,hospital_11,doctor_11,title,unit,email,institute,phone,manage,string_point,0,0,0
 鸡哥,男,2016年5月,boss,宇宙科,boss,boss,boss,123,122@qq.com,boss,da怪兽,boss,0,10,10
