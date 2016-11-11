@@ -51,9 +51,9 @@ class RSM(models.Model):
     district = models.CharField('地区', max_length = 250, default = "district")
     members = models.ManyToManyField(Client, verbose_name = '负责的客户群', default = "member")
     def __unicode__(self):
-        return self.name
+        return self.user_name
     def __str__(self):
-        return self.name
+        return self.user_name
     class Meta:
         verbose_name = '大区经理'
         verbose_name_plural = '大区经理'

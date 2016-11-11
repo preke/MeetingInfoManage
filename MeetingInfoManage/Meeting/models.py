@@ -6,8 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 # Create your models here.
 @python_2_unicode_compatible
 class Meeting(models.Model):
-    year = models.IntegerField('年', default = 2016)
-    month = models.IntegerField('月', default = 1)
+    date =models.CharField('日期', max_length=100, default='2016/11/11')
     number = models.CharField('编号', max_length = 250, blank = True, default = "number")
     theme = models.CharField('活动主题', max_length = 250, blank = True, default = "theme")
     name_of_speecher = models.CharField('讲师名字', max_length = 250, blank = True, default = 'speecher')
@@ -23,4 +22,4 @@ class Meeting(models.Model):
     class Meta:
         verbose_name = '会议'
         verbose_name_plural = '会议'
-        ordering = ['-year', '-month']
+

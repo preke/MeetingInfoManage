@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} 首页 {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3" align="center" >
+                    <h4>
+                        <a href="meeting_info.html" style="color: #000;font-weight: bold;">会议信息</a>
+                    </h4>
+                </div>
+                <div class="col-sm-3" align="center" id="current">
+                    <h4>
+                        <a href="{% url 'index' %}">用户信息</a>
+                    </h4>
+                </div>
+                <div class="col-sm-3" align="center">
+                    {% if request.session.RMM %}
+                    <h4>
+                        <a href="{% url 'meeting_lead_in' %}">会议录入</a>
+                    </h4>
+                    {% endif %}
+                </div>
+
+                <div class="col-sm-3" align="center">
+                    {% if request.session.RSM %}
+                    <h4>
+                        <a href="{% url 'client_lead_in' %}">用户录入</a>
+                    </h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div style="background-color: #FBF4F4; height: 800px; width: 1400px" class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>出生年月</th>
+                <th>职务</th>
+                <th>科室</th>
+                <th>专业</th>
+                <th>昵称</th>
+                <th>单位</th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>学会任职</th>
+                <th>特长</th>
+                <th>负责大区经理</th>
+                <th>客户潜力权重</th>
+                <th>主席统计</th>
+                <th>讲者统计</th>
+            </thead>
+            <tbody>
+                {% for client in page_client_list.object_list %}
+                <tr>
+                    <th>{{client.name}}</th> <th>{{client.sex}}</th> <th>{{client.birth}}</th> <th>{{client.job}}</th>
+                    <th>{{client.office}}</th> <th>{{client.major}}</th> <th>{{client.title}}</th> <th>{{client.unit}}</th>
+                    <th>{{client.phone}}</th> <th>{{client.email}}</th> <th>{{client.institute_job}}</th> <th>{{client.string_point}}</th>
+                    <th>{{client.region_manager}}</th> <th>{{client.potential_weight}}</th> <th>{{client.chairman_times}}</th> <th>{{client.speecher_times}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <hr/>
+        <br>
+        <br>
+        <div class="container" align="center">
+            当前页:{{page_client_list.number}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="?page=1"> 首页 </a> &nbsp;&nbsp;
+            {% if page_client_list.has_previous %} <a href="?page={{page_client_list.prevoius_page_number}}" > 上一页 </a> &nbsp;&nbsp; {% endif %}
+            {% if page_client_list.has_next %} <a href="?page={{page_client_list.next_page_number}}" > 下一页 </a> &nbsp;&nbsp; {% endif %}
+            <a href="?page={{paginator.num_pages}}"> 末页 </a>
+        </div>
+    </div>
+
+{% endblock %}
