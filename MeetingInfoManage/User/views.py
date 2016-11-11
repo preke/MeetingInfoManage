@@ -85,9 +85,6 @@ def lead_in_extends(request):
         # except:
             # return HttpResponse('error')
 
-
-
-
 def unicode_2_utf_8(cell):
     if isinstance(cell, unicode):
         return cell.encode('utf-8')
@@ -96,7 +93,7 @@ def unicode_2_utf_8(cell):
 
 def lead_out(request):
     client_list = Client.objects.all();
-    relative_path = 'static/storage/' + 'client';
+    relative_path = 'static/storage/' + 'client.csv';
     csvfile = open(os.path.join(BASE_DIR, relative_path), 'w')
     writer = csv.writer(csvfile)
     writer.writerow(['姓名', '性别', '出生年月', '职务', '科室', '专业', '职称', '单位', '手机',

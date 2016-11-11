@@ -78,16 +78,6 @@ def lead_in_extends(request):
                 break
         return HttpResponseRedirect(reverse("index"))
 
-
-
-
-
-
-
-
-
-
-
 def unicode_2_utf_8(cell):
     if isinstance(cell, unicode):
         return cell.encode('utf-8')
@@ -96,7 +86,7 @@ def unicode_2_utf_8(cell):
 
 def lead_out(request):
     meeting_list = Meeting.objects.all();
-    relative_path = 'static/storage/meeting'
+    relative_path = 'static/storage/meeting.csv'
     csvfile = open(os.path.join(BASE_DIR, relative_path), 'w')
     writer = csv.writer(csvfile)
     writer.writerow(['年月', '编号', '活动主题', '讲者名字', '讲者类型', '讲者城市', '参会人数', '会议类型', '会议权重'])
