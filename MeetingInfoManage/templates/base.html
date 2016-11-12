@@ -70,6 +70,81 @@
             </form>
         {% endif %}
         <hr>
+        <div class="container">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-3" align="center" >
+                            <h4>
+                                <a href="{% url 'index' %}">用户信息</a>
+                            </h4>
+                        </div>
+                        <div class="col-sm-3" align="center" >
+                            <h4>
+                                <a href="{% url 'meeting_info' %}">会议信息</a>
+                            </h4>
+                        </div>
+                        <div class="col-sm-3" align="center">
+                            {% if request.session.RMM %}
+                            <h4>
+                                <a href="{% url 'meeting_lead_in' %}">会议录入</a>
+                            </h4>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            {% if request.session.RSM %}
+                            <h4>
+                                <a href="{% url 'client_lead_in' %}">用户录入</a>
+                            </h4>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% url 'client_lead_out' %}">客户信息导出ss</a> </br>
+                                <a href="{% static 'storage/client.csv' %}">客户信息导出</a>
+                            </h4>
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% url 'meeting_lead_out' %}">会议信息导出ss</a> </br>
+                                <a href="{% static 'storage/meeting.csv' %}">会议信息导出</a>
+                            </h4>
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% url 'client_lead_in_extends' %}">客户信息excel导入</a>
+                            </h4>
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% url 'meeting_lead_in_extends' %}">会议信息excel导入</a>
+                            </h4>
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% static 'storage/blank_client.csv' %}">客户信息excel格式表</a>
+                            </h4>
+                        </div>
+
+                        <div class="col-sm-3" align="center" id="current">
+                            <h4>
+                                <a href="{% static 'storage/blank_meeting.csv' %}">会议信息excel格式表</a>
+                            </h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
         {% block body %} body {% endblock %}
     </body>
 

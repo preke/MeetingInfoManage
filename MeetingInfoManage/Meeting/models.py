@@ -15,6 +15,7 @@ class Meeting(models.Model):
     number_of_participant = models.IntegerField('参会人数', default = 0 )
     type_of_meeting = models.CharField('会议类型', max_length = 250, blank = True, default = 'meeting')
     weight_of_meeting = models.IntegerField('会议权重', default= 0)
+    is_end_up = models.BooleanField('结束', default = False)
     def __unicode__(self):
         return self.number
     def __str__(self):
@@ -22,4 +23,3 @@ class Meeting(models.Model):
     class Meta:
         verbose_name = '会议'
         verbose_name_plural = '会议'
-

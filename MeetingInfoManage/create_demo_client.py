@@ -2,7 +2,6 @@
 from MeetingInfoManage.wsgi import *
 from User.models import *
 
-
 def main():
     for i in range(0, 50):
         client, not_exist = Client.objects.get_or_create(name = 'Preke_Boyce_{}'.format(str(i)))

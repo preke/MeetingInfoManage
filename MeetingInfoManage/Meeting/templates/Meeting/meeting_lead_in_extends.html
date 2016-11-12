@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %} 客户信息导入 {% endblock %}
+
+{% block body %}
+    <form enctype="multipart/form-data" method="post">
+        <input type="file" name="meeting_lead_in_extends">
+        <button> 提交 </button>
+    </form>
+{% endblock %}
